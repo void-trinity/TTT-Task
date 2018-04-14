@@ -24,13 +24,13 @@ This project was made as the part of the Terribly Tiny Tales task to be submitte
 # Working
 
 <ol>
-    <li> First the React App is rendered in the front end. The state of the current app is set as following:
-        {
-            loaded: false, // Tells whether the data is received from the backend
-            loading: false, // Tells about the fetching state. When True, loader is shown on screen
-            data: [], // Used to store wordlist array received from backend
-            n: 0, // The value to be sent to backend for number of words to be returned
-            success: false, // In sync with the success token returned in json by backend. Used to render error 
+    <li> First the React App is rendered in the front end. The state of the current app is set as following:<br>
+        {<br>
+            loaded: false, // Tells whether the data is received from the backend<br>
+            loading: false, // Tells about the fetching state. When True, loader is shown on screen<br>
+            data: [], // Used to store wordlist array received from backend<br>
+            n: 0, // The value to be sent to backend for number of words to be returned<br>
+            success: false, // In sync with the success token returned in json by backend. Used to render error.<br>
         }
     <li> The app waits for the button to be clicked and sends the number entered in the text box to the backend in the form of JSON.
     <li> The Express server receives the json and then fetches the text file hosted at TTT server
