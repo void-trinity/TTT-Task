@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
-import './materialize.css'
+import './materialize.css';
 
 class App extends Component {
   constructor(props) {
@@ -47,7 +46,7 @@ class App extends Component {
             </div>
             <div className="row">
               <div className="col s12">
-                <div className="card blue-grey darken-1">
+                <div className="card grey darken-4">
                   <div className="card-content white-text">
                     <span className="left-align card-title">Input Here</span>
                     <p className="left-align">Basically, the input box below takes input as a number N and returns
@@ -56,13 +55,13 @@ class App extends Component {
                   </div>
                   <div className="card-action">
                   <div className="input-field row">
-                    <input id="number" type="text" pattern="[0-9]" className="white-text" onChange={this.handleChange.bind(this)}/>
+                    <input id="number" type="number" className="white-text" onChange={this.handleChange.bind(this)}/>
                   </div>
                   </div>
                 </div>
                 <div style={{ marginTop: 50 }}>
-                        <a className="waves-effect waves-light btn" onClick={this.makerequest.bind(this)}>Fetch Words</a>
-                      </div>
+                  <a className="waves-effect waves-light black btn" onClick={this.makerequest.bind(this)}>Fetch Words</a>
+                </div>
               </div>
             </div>
           </div>
