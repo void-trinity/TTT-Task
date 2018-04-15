@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Table from './components/Table';
+import Error from './components/Error';
+import Loader from './components/Loader';
+import InputPage from './components/InputPage';
 import './materialize.css';
 
 class App extends Component {
@@ -37,75 +41,21 @@ class App extends Component {
     if(!this.state.loaded) {
       if(!this.state.loading) {
         return (
-          <div>
-            <div className="row">
-              <p className="left-align">This app is completely made on react JS with node JS as backend tool using express JS
-                library. Materialize CSS has been used for little bit styling of the page for better
-                representation. Link: <a href="http://materializecss.com">Materialize CSS</a>
-              </p>
-            </div>
-            <div className="row">
-              <div className="col s12">
-                <div className="card grey darken-4">
-                  <div className="card-content white-text">
-                    <span className="left-align card-title">Input Here</span>
-                    <p className="left-align">Basically, the input box below takes input as a number N and returns
-                      first n numbers with highest frequency. Enter the value below: 
-                    </p>
-                  </div>
-                  <div className="card-action">
-                  <div className="input-field row">
-                    <input id="number" type="number" className="white-text" onChange={this.handleChange.bind(this)}/>
-                  </div>
-                  </div>
-                </div>
-                <div style={{ marginTop: 50 }}>
-                  <a className="waves-effect waves-light black btn" onClick={this.makerequest.bind(this)}>Fetch Words</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <InputPage handleChange={this.handleChange.bind(this)} makerequest={this.makerequest.bind(this)}/>
         );
       } else {
         return(
-          <h1>Loading</h1>
+          <Loader />
         );
       }
     }
     if (this.state.success) {
-      let rows = this.state.data.map(word => {
-        return <WordRow key={5}
-          data = {
-            word
-          }
-          />
-      })
       return(
-        <div className="container">
-          <table className='striped highlight'>
-            <thead>
-              <tr>
-                <th>Word</th>
-                <th>Frequency</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows}
-            </tbody>
-          </table>
-          <div className="row" style={{ marginTop: 30 }}>
-            <a className="waves-effect waves-light btn" onClick={() => this.setState({ loaded: false})}>Try Again</a>
-          </div>
-        </div>
+        <Table data={this.state.data} tryagain={() => this.setState({ loaded: false})}/>
       );
     } else {
       return(
-        <div>
-          <h1> Word limit exceeded. More than words present in the file </h1>
-          <div className="row" style={{ marginTop: 30 }}>
-              <a className="waves-effect waves-light btn" onClick={() => this.setState({ loaded: false})}>Try Again</a>
-          </div>
-        </div>
+        <Error tryagain={() => this.setState({ loaded: false})}/>
       )
     }
   }
@@ -115,7 +65,7 @@ class App extends Component {
       <div className="App">
         <nav>
           <div className="nav-wrapper grey darken-4">
-            <a href="#" className="brand-logo center">Terribly Tiny Tales Task</a>
+            <a href="http://terriblytinytales.com/" className="brand-logo center">Terribly Tiny Tales Task</a>
           </div>
         </nav>
         <div className='container' style={{ alignContent: 'center' }}>
@@ -126,19 +76,6 @@ class App extends Component {
       </div>
     );
   }
-}
-
-const WordRow = (props) => {
-  return (
-    <tr>
-      <td>
-        { props.data.word }
-      </td>
-      <td>
-        { props.data.count }
-      </td>
-    </tr>
-  );
 }
 
 export default App;
